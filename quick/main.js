@@ -34,7 +34,7 @@ console.log(array[0]);
 // オブジェクト
 // {Curl}で宣言するのは配列ではなくこれ。Rubyのハッシュに少し似ている
 // バリューには変数も使用できる
-let gender = male;
+let gender = 'male';
 let result = {
   name: 'Sam',
   age: 40,
@@ -48,3 +48,31 @@ console.log(result['age']);
 result.name = 'Sam Bridges';
 // プロパティの追加は、元のオブジェクトに存在しないキーをいきなり書いても良い
 result.actor = 'Norman Reedus';
+
+// undefinedとnull
+// undefinedは初期化されていない変数や、オブジェクトの存在しないプロパティを呼び出した時
+let uninitializedLet;
+console.log('uninitializedLetの値は' + uninitializedLet);
+console.log(result.name + 'のhobbyは' + result.hobby);
+// nullは明示的に書かないと基本的に出てこない
+let piyo = null;
+console.log('piyoの値は' + piyo);
+
+// if文
+// Javaとほとんど同じ
+let hogehoge = 3;
+if (hogehoge > 3) {
+  console.log('hogehogeは3より大きい');
+} else if (hogehoge === 3) {
+  console.log('hogehogeは3である');
+} else {
+  console.log('hogehogeは3より小さい');
+}
+
+// 条件式
+// JavaScriptでは原則===と!==を使用する。データ型も含めて同一であるか確認される
+let numberThree = 3;
+let stringThree = '3';
+console.log(numberThree !== stringThree);
+// ==を使ったギャグと言うかホラーと言うか
+console.log([] == ![]); // trueが返る…
