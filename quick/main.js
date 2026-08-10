@@ -76,3 +76,57 @@ let stringThree = '3';
 console.log(numberThree !== stringThree);
 // ==を使ったギャグと言うかホラーと言うか
 console.log([] == ![]); // trueが返る…
+
+// 三項演算子
+// JavaやRubyとほとんど同じ
+let testTernary = (numberThree === stringThree) ? '同じやで' : '違うで';
+console.log(testTernary);
+
+// switch文
+// Javaとほぼ完全に同じ
+let fruit = 'Apple';
+switch (fruit) {
+  case 'Apple':
+    console.log('リンゴ');
+    break;
+  case 'Banana':
+    console.log('バナナ');
+    break;
+  case 'Grape':
+    console.log('ブドウ');
+    break;
+  default:
+    console.log('どれでもないな');
+}
+// ブロックスコープをつけることも出来る。これはJavaでも同じ事が可能
+// 「ブロック」なので、{Curl}の後ろに;を付けない
+let vegetable = 'cucumber';
+switch (vegetable) {
+  case 'asparagus': {
+    console.log('アスパラガス');
+    break;
+  }
+  case 'beet': {
+    console.log('ビート');
+    break;
+  }
+  default: {
+    console.log('どちらでもないな');
+  }
+}
+
+// for文
+// Javaとほぼ同じ
+for (let i = 0 ; i < 10 ; i++) {
+  console.log(i);
+}
+// 初期化式で宣言した変数のスコープはブロック内のみ。これもJavaと同じ
+// console.log('iの値は' + i + 'やで'); // エラーになる
+
+// for-of文
+// ofの前はconstで宣言するのがお約束。どうしてもfor内部で書き換える場合ときはletを使うようだ
+// constは毎回新しいものが用意されるくらいに考えておこう
+let fruits = ['Apple', 'Banana', 'Cherry'];
+for (const fruit of fruits) {
+  console.log(fruit);
+}
