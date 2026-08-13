@@ -130,3 +130,17 @@ let fruits = ['Apple', 'Banana', 'Cherry'];
 for (const fruit of fruits) {
   console.log(fruit);
 }
+
+
+// 関数の宣言
+// 基本的な関数宣言 functionで書き始める
+function add(a, b) {
+  return a + b; // returnの使い方はRubyとほとんど同じ
+}
+// 引数の渡し方もRubyとほとんど同じ
+console.log( add(1,2) )
+
+// 関数式
+
+// アロー関数
+// functionを書かない宣言の仕方
