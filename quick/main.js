@@ -134,6 +134,7 @@ for (const fruit of fruits) {
 
 // 関数の宣言
 // 基本的な関数宣言 functionで書き始める
+// 引数が0個の場合でも(parentheses)は省略できない
 function add(a, b) {
   return a + b; // returnの使い方はRubyとほとんど同じ
 }
@@ -141,6 +142,40 @@ function add(a, b) {
 console.log( add(1,2) )
 
 // 関数式
+// 関数をデータとして扱える。引数として渡すことが出来る
+// 引数として渡す関数のことを「コールバック関数」という
+let addFE = function (a, b) {
+  let result = a + b;
+  return result;
+}
 
 // アロー関数
-// functionを書かない宣言の仕方
+// functionを書かずに関数を宣言できる。そのままコールバック関数として使える
+// 以下はforEachの引数としてアロー関数を宣言している
+const players = ["Ohtani", "Betts", "Freeman"];
+players.forEach((player) => {
+  console.log(player);
+});
+// 引数が1個だけの時は(parentheses)を省略して以下のようにも書ける。読みづらい気もするが、覚えておこう
+players.forEach(player => console.log(player));
+
+// メソッドの定義の仕方
+// JSにおけるメソッドとは「オブジェクトのプロパティのバリューに入っている関数」のこと
+const personA = {
+  name: 'hoge',
+  age: 20,
+  greet: function () {
+    console.log('hogeだよ。');
+  },
+}
+personA.greet();
+
+// メソッドは下記のように:とfunctionを省略して定義することも出来る
+const personB = {
+  name: 'fuga',
+  age: 30,
+  greet: function () {
+    console.log('fugaなのだ。');
+  },
+}
+personB.greet();
