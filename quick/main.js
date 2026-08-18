@@ -174,8 +174,44 @@ personA.greet();
 const personB = {
   name: 'fuga',
   age: 30,
-  greet: function () {
+  greet() {
     console.log('fugaなのだ。');
   },
 }
 personB.greet();
+
+
+// 分割代入(オブジェクト)
+// オブジェクトの定義
+const personC = {
+  name: 'hoge',
+  age: 26,
+  gender: 'male'
+}
+
+// 通常通りに書く場合
+// let old = personC.age;
+// let genderC = personC.gender;
+
+// 分割代入の書き方
+let { age: old, genderC } = personC;
+console.log(old);
+console.log(gender);
+
+
+// 分割代入(配列)
+// 配列の定義
+let prefectures = ['Tokyo', 'Saitama', 'Kanagawa'];
+
+// 通常通りに書く場合
+// let A = prefectures[0];
+// let B = prefectures[1];
+// let C = prefectures[2];
+
+// 分割代入の書き方
+let [ A, B, C ] = prefectures;
+console.log(A + B + C);
+// [Bracket]の中の変数が配列の要素数より多い場合、エラーにならずundefinedが代入される
+// 以下の例ではDがundefinedになる
+// let [ A, B, C, D ] = prefectures;
+// console.log(A + B + C + D);
