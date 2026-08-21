@@ -215,3 +215,33 @@ console.log(A + B + C);
 // 以下の例ではDがundefinedになる
 // let [ A, B, C, D ] = prefectures;
 // console.log(A + B + C + D);
+
+// クラス
+// クラスとはインスタンスの設計図。似たオブジェクトを大量に作る際に便利
+class Car {
+  // constructorはインスタンス生成時、すなわちnewを実行する時1回だけ実行される
+  constructor(name, company) {
+    // thisはRubyのselfに近いもの。インスタンスそのものを意味する
+    this.name = name;
+    this.company = company;
+  }
+  // 関数…というかメソッドの宣言。メソッド宣言専用の書き方をする必要がある
+  run() {
+    console.log('run')
+  }
+  stop() {
+    console.log('stop')
+  }
+  // function fly() {} // エラーになる
+}
+// インスタンスの生成。クラスから生成されたオブジェクトのことをインスタンスと言う
+// 生成時に引数を渡すことが出来る
+let carA = new Car('prius', 'Toyota');
+let carB = new Car('note', 'Nissan');
+let carC = new Car('axela', 'Mazda');
+// メソッドの呼び出し
+// Rubyとほとんど同じ
+carA.run();
+carA.stop();
+console.log(carB.name);
+console.log(carB.company);
