@@ -245,3 +245,33 @@ carA.run();
 carA.stop();
 console.log(carB.name);
 console.log(carB.company);
+
+
+// pushメソッド
+// 配列にの「末尾」にデータを足す。これ自体の戻り値は配列の要素数(Number型)
+// 配列にの「先頭」にデータを足す時はunshiftを使う。戻り値は同上。
+// const players = ["Ohtani", "Betts", "Freeman"]; // 上で宣言したもの
+players.push('Muncy');
+console.log(players);
+// popメソッド
+// 配列の「末尾」のデータを削除して、削除した要素を返す破壊的メソッド。引数は無視される
+// 配列の「先頭」を取り除く場合はshiftメソッドを使う
+// どちらも、戻り値は配列から取り除いた要素になる
+console.log(players.pop());
+console.log(players);
+// spliceメソッド
+// 任意の位置のデータ削除・追加を行うメソッド。戻り値は取り除いた要素の配列になる
+// players.splice(1, 1);          // 削除のみの時は引数2つ
+// players.splice(1, 0, 'Pages'); // 追加のみの時は第2引数に0を指定
+console.log(players.splice(1, 1, 'Pages')); // 削除した要素を配列で戻す
+console.log(players);
+
+// mapメソッド
+// 既存の配列を元に、新しい配列を作るメソッド
+// 第1引数は必ずコールバック関数になる(ここでは省略するが、引数は上限3個)
+const nums = [0, 1, 2];
+const newNums = nums.map((num) => {
+  return num * 2;
+});
+// const newNums = nums.map(num => num * 2); // 省略記法だとこうなる
+console.log(newNums);
