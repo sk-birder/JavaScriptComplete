@@ -1,3 +1,14 @@
+// 何に依存しているのかわかりやすくするため、importは原則ファイルの先頭に記述する
+// 名前付きインポート
+import { mul, dataExternal } from 'functions.js';
+// デフォルトインポート
+// export defualtの内容は{Bracket}なし、任意の名前で呼び出すことが出来る
+import greeting from 'functions.js';
+
+console.log(mul(2, 3));
+console.log(dataExternal);
+console.log(greeting);
+
 // Developer ToolsのConsole画面での表示
 console.log(1); 
 
