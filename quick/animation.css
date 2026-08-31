@@ -1,0 +1,19 @@
+.image {
+  max-width: 25%;
+}
+
+/* スライド表示させるだけならCSSで実現可能 */
+.fade-slide-animation {
+  animation: fade-slide 1.5s;
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0%;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+}
