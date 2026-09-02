@@ -1,10 +1,16 @@
+section {
+  opacity: 0%; /* アニメーション前のチラ見え防止 */
+  margin-bottom: 32px;
+  margin-left: 32px;
+}
+
 .image {
   max-width: 25%;
 }
 
 /* スライド表示させるだけならCSSで実現可能 */
 .fade-slide-animation {
-  animation: fade-slide 1.5s;
+  animation: fade-slide 1.5s forwards; /* forwardsを指定するとanimation後の状態を保持する */
 }
 
 @keyframes fade-slide {
