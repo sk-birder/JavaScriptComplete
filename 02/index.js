@@ -42,3 +42,26 @@ message = `1行目
   2行目
 3行目`;
 console.log(message);
+
+// 数字以外のString型の文字列に算術演算子を適用するとNaNが返る
+// NaN自体の型はNumber型である
+message = 'hoge';
+let result = message - 10;
+console.log(result);
+console.log(typeof result);
+
+// 明示的な型変換
+// String -> Number
+const userInput = '10.9';
+let calcResult;
+calcResult = Number(userInput) + 1;
+calcResult = parseInt(userInput) + 1;   // parseIntのみ小数点以下切り捨て
+calcResult = parseFloat(userInput) + 1;
+calcResult = +userInput + 1;
+console.log(calcResult);
+// Number -> String
+// ただの連結演算子で変換できるので、使用機会は少ないかも
+const tenNumber = 10;
+calcResult = '10' + String(tenNumber);
+calcResult = '10' + tenNumber.toString(); // これだけfunctionではなくmethod Rubyのto_sに似ている
+console.log(calcResult);
