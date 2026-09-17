@@ -65,3 +65,35 @@ const tenNumber = 10;
 calcResult = '10' + String(tenNumber);
 calcResult = '10' + tenNumber.toString(); // これだけfunctionではなくmethod Rubyのto_sに似ている
 console.log(calcResult);
+
+// 配列
+// Javaと違い` [] `で初期化する。各要素のデータ型はバラバラでも良い
+let array = ['apple', 1 , true];
+// pushとpopで配列の末尾への追加・削除、unshiftとshiftで配列の戦闘への追加・削除が可能
+
+// オブジェクト
+// キーとバリューのセット(プロパティ)の集合。Rubyのハッシュに似たもの
+const coffee = {
+  name: 'Chocolate Moca',
+  size: 350,
+  isHot: true,
+  toppings: ['Cinnamon', 'Caramael'],
+  nutritions: { // オブジェクトの中にオブジェクトを入れることも可能
+    calories: 430,
+    sugars: 53,
+    caffeine: 100,
+  }, // 末尾のカンマはなくてもよいが、書いたほうが良い。あとから書くと、追加の際にGitのログでその行も変更したという体になったりする
+};
+// 呼び出すときはオブジェクト名.キー名で呼び出す。再代入を行うときも同様
+console.log(coffee.name);
+coffee.isHot = false;
+// 新しいキーを追加するときはいきなりオブジェクト名.新しいキー名で追加できる
+coffee.barista = 'sk-birder';
+console.log(coffee.barista);
+
+// nullとundefined
+// undefinedは初期化されていない変数などに代入？されている。ある意味エラーみたいなものと考えることもできる
+// nullを使うのは「意図的に空にしている」と明示したいとき。undefinedだと明示的に空にしているかわからないため
+// let hoge = undefined; // 基本的に使わない
+let hoge = null;
+console.log(hoge);
