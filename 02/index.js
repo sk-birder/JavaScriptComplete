@@ -77,7 +77,7 @@ const coffee = {
   name: 'Chocolate Moca',
   size: 350,
   isHot: true,
-  toppings: ['Cinnamon', 'Caramael'],
+  toppings: ['Cinnamon', 'Caramel'],
   nutritions: { // オブジェクトの中にオブジェクトを入れることも可能
     calories: 430,
     sugars: 53,
@@ -97,3 +97,17 @@ console.log(coffee.barista);
 // let hoge = undefined; // 基本的に使わない
 let hoge = null;
 console.log(hoge);
+
+// typeof演算子
+// Rubyの.classメソッドやJavaの.getClass()メソッドとは違う書き方
+// 配列やnullの戻り値はobjectになる
+console.log(typeof array);
+
+// 関数宣言
+// 書いてあるだけだと実行されない。仮引数(parameter)が0の場合も(parentheses)は省略できない
+function add(num1, num2) {
+  console.log(num1 + num2);
+}
+// 呼び出されて初めて実行される。な・ん・ど・で・も呼び出せる
+// 引数(argument)の個数が少ないと足りない分はundefinedになる
+add(1, 2);
