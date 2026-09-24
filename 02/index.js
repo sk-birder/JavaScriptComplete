@@ -104,10 +104,40 @@ console.log(hoge);
 console.log(typeof array);
 
 // 関数宣言
+// 下準備
+const globalConstant = 1;
+let globalVariable = 'hoge';
 // 書いてあるだけだと実行されない。仮引数(parameter)が0の場合も(parentheses)は省略できない
 function add(num1, num2) {
-  console.log(num1 + num2);
+  // スコープ説明用
+  const localConstant = 1;
+  let localVariable = 'hogehoge';
+
+  // グローバル変数への再代入が可能
+  globalVariable = 'fuga';
+
+  // シャドーイング
+  // 同じ名前の変数・定数を「再宣言」すると、ブロック内部だけ数値を変更できる
+  const globalConstant = 2;
+  console.log('globalConstantの値は' + globalConstant);
+  
+  return num1 + num2;  // returnで値を返せる。returnを書かなかったり、returnの後に何も書かない場合はundefinedが返る
+  console.log('hoge'); // returnより下は実行されない。後に何も書かないreturnはEarly returnなどに使える
 }
+
+// スコープ
+// パラメータおよびブロック内部で宣言した変数・定数は外部で呼び出せない
+// 以下の2行はどちらもis not definedエラーになる
+// console.log(localConstant);
+// console.log(localVariable);
+
 // 呼び出されて初めて実行される。な・ん・ど・で・も呼び出せる
 // 引数(argument)の個数が少ないと足りない分はundefinedになる
-add(1, 2);
+const returnedValue = add(1, 2);
+console.log(returnedValue);
+
+// ブロック内部で再代入した変数は、再代入した値になる
+console.log(globalVariable);
+// シャドーイングで再宣言した定数・変数は、元の値のままになる。TaxRateとかで使えそう
+console.log('globalConstantの値は' + globalConstant);
+
