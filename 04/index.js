@@ -33,7 +33,7 @@ coffee3.addSugar = true;
 console.log(coffee1);
 console.log(coffee3);
 
-// Truty & Falsy
+// Truthy & Falsy
 let likeBoolean;
 console.log(likeBoolean);
 if (likeBoolean) {
@@ -44,18 +44,18 @@ if (likeBoolean) {
   // undefined, null, 空のString, 数値の0, NaN
 }
 
-// 論理積とTruty / Falsy
-// 左辺がTrutyなら右辺を、Falsyなら左辺をそのまま返す
+// 論理積とTruthy / Falsy
+// 左辺がTruthyなら右辺を、Falsyなら左辺をそのまま返す
 console.log('1' && []); // 戻り値は空の配列
 console.log(0 && []);   // 戻り値はNumber型の0
 
-// 論理和とTruty / Falsy
-// 左辺がTrutyなら左辺をそのまま返す。右辺の値や…真偽なぞ…どうでもよいのだ
+// 論理和とTruthy / Falsy
+// 左辺がTruthyなら左辺をそのまま返す。右辺の値や…真偽なぞ…どうでもよいのだ
 // 左辺がFalsyなら左辺をそのまま返す
 console.log('1' || []); // 戻り値はString型の1
 console.log(0 || []);   // 戻り値は空の配列
 
-// 論理和とTruty / Falsyの利用例
+// 論理和とTruthy / Falsyの利用例
 // ユーザー入力がないときにデフォルト値を入れる場合などに使える
 const userInput = '';
 const userName = userInput || 'DefaultName';
@@ -79,3 +79,33 @@ console.log(!'')   // true
 // 値のあるなしの判定に使えそう
 console.log(!!'1') // true
 console.log(!!'')  // false
+
+// 三項演算子
+// Javaとほぼ同じだが、Truthy / Falsyでも使える
+const ternary = undefinedVaribable ? 'Trueやな' : 'Falseやで';
+console.log(ternary);
+
+// swtich文
+function vegetableColor(vegetable) {
+  switch (vegetable) {
+    // caseにおける判定は===と同様に行われる。==ではない
+    // let message; // エラーになる。ここでlet宣言は出来ない
+    case 'tomato': {
+      const message = 'red'; // 各caseはブロックにしなくても動作するが、変数・定数の宣言はブロック内で行わないと多重定義エラーになる
+      console.log(message);
+      break; // 関数内ならばreturnでも同様のことができる
+    }
+    case 'radish': // 意図的にbreakを記述しないことで、複数条件や複数処理を与えることができる
+    case 'onion': {
+      const message = 'white';
+      console.log(message);
+      break;
+    }
+    default: {// defaultを書かないと、条件を満たさない場合なにも行われない
+    const message = 'not found';
+      console.log(message);
+      break; // 書かずとも問題ないが書いておこう
+    }
+  }
+}
+vegetableColor('radish');

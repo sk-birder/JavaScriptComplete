@@ -118,6 +118,10 @@ function add(num1, num2) {
 
   // シャドーイング
   // 同じ名前の変数・定数を「再宣言」すると、ブロック内部だけ数値を変更できる
+
+  // シャドーイング時のDead zoneについて (Section4 62)
+  // シャドーイングを行う際は、再宣言を行うまで「未定義扱い」になる
+  // console.log('globalConstantの値は' + globalConstant); // before initializationエラーになる
   const globalConstant = 2;
   console.log('globalConstantの値は' + globalConstant);
   
