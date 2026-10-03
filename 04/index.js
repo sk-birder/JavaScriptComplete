@@ -109,3 +109,32 @@ function vegetableColor(vegetable) {
   }
 }
 vegetableColor('radish');
+
+// while
+// Javaとあまり変わらない。(parenthese)の中がTruthyのとき実行する
+let count = 1;
+while (count < 4) {
+ console.log(`${count}回目のwhile処理やで。`);
+ count++;
+}
+
+// do-while
+// Javaとあまりry。(parenthese)の中がTruthyのとき実行する
+// 最低1回は処理をしたいときに
+count = 1;
+do {
+ console.log(`${count}回目のdo-while処理やで。`);
+ count++;
+} while (count < 4);
+
+// for
+// Javaとry。初期化式で宣言した変数のスコープはforブロックの内部だけ
+// 初期化式と条件変化式、条件式をまとめて書ける。長い処理を繰り返すときに特に有効
+// 初期化式と条件変化式は空文にできる。条件式を空文にするとTrue扱いになり無限ループする
+// ---
+// 初期化式は「最初に1回だけ実行する式」なので、ここにletを書かずに既存の変数を使うこともできる
+// 同名のlet再宣言をすれば、シャドーイングの挙動になる
+for (let count = 1 ; count < 10 ; count++) {
+ console.log(`${count}回目のfor処理やで。`);
+}
+console.log(count);
