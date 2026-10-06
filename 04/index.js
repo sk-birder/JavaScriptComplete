@@ -138,3 +138,42 @@ for (let count = 1 ; count < 10 ; count++) {
  console.log(`${count}回目のfor処理やで。`);
 }
 console.log(count);
+
+// カンマ演算子
+// 2つ以上の条件変化式を使いたい時に ※letやconstのカンマは演算子ではなくオプション
+// 演算子の優先度は=よりも低い for文以外で使うことはほぼない
+for (
+  let i = 0, j = 0, k =0;
+  (i + j + k) < 10;
+  i += 1 , j += 2
+) {
+  // if .. k += 3;
+}
+
+// for-of
+// 反復可能なオブジェクトに使える(高度な内容らしい)
+// 配列に使用するのが基本。文字列にも使えるがほぼ使わない
+const players = ['Ohtani', 'Yamamoto', 'Sasaki', 'Suzuki', 'Imanaga'];
+// 初期化式はconstを使うのが基本。forブロック内部で書き換える必要がないため
+for (const player of players) {
+  console.log(player);
+}
+// 通常のfor文での書き方。やや冗長
+for (let i = 0 ; i < players.length ; i++) {
+  console.log(players[i]);
+}
+
+// for-in
+// オブジェクトに使用可能。当然配列にも使えるが、配列はfor-ofを使うことが多い
+const player0 ={
+  name: 'Ohtani',
+  heightCm: 193,
+  team: 'LAD',
+  hometown: 'Iwate'
+}
+for (const key in player0) {
+  // inの左で初期化したものには各プロパティのキーが入る(配列では番号)
+  console.log(key + ': ' + player0[key]);
+  // playerA.keyだとundefinedが返る。.の右には変数名を使えないため
+  // 配列呼び出しのようにplayerA[key]と書くと変数を使った値の呼び出しが可能
+}

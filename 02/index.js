@@ -4,6 +4,10 @@
 // 初期値無しでも宣言可能。undefinedが代入される
 let count;
 console.log(count);
+// カンマまで区切ることで複数同時宣言が可能。主にfor文の初期化式で使用する(Section4 68)
+// このカンマはカンマ演算子ではなく、letやconstのオプションである
+let test1 = '1', test2 = 2, test3;
+console.log(test1, test2, test3);
 
 // letは再代入可能だが、同じ名前での再宣言は出来ない
 // let count;
@@ -87,6 +91,9 @@ const coffee = {
 // 呼び出すときはオブジェクト名.キー名で呼び出す。再代入を行うときも同様
 console.log(coffee.name);
 coffee.isHot = false;
+// 配列のようにな記述での呼び出し方。.を使うと変数名を使えないが、[Bracket]を使うと変数を使うことができる
+// 変数ではなくキー名を記述するときは文字列として指定する
+console.log(coffee['isHot']);
 // 新しいキーを追加するときはいきなりオブジェクト名.新しいキー名で追加できる
 coffee.barista = 'sk-birder';
 console.log(coffee.barista);
