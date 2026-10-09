@@ -1,3 +1,12 @@
+// break用
+// 下記リンクの「2 つの値の間のランダムな整数を得る」から
+// https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomInt(min, max) {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // 上限は除き、下限は含む
+}
+
 // if文
 // Javaと同じ。ただし「等しい」ときは原則===を使うことに注意
 let testNumber = -1;
@@ -165,15 +174,46 @@ for (let i = 0 ; i < players.length ; i++) {
 
 // for-in
 // オブジェクトに使用可能。当然配列にも使えるが、配列はfor-ofを使うことが多い
-const player0 ={
+const player17 ={
   name: 'Ohtani',
   heightCm: 193,
   team: 'LAD',
   hometown: 'Iwate'
-}
-for (const key in player0) {
+};
+for (const key in player17) {
   // inの左で初期化したものには各プロパティのキーが入る(配列では番号)
-  console.log(key + ': ' + player0[key]);
+  console.log(key + ': ' + player17[key]);
   // playerA.keyだとundefinedが返る。.の右には変数名を使えないため
   // 配列呼び出しのようにplayerA[key]と書くと変数を使った値の呼び出しが可能
+}
+
+// break
+// switchやループ処理に使う。ネストした場合は上の階層の処理に影響しない
+// let rnd;
+while (true) {
+  let rnd = getRandomInt(1, 7);
+  if (rnd === 1) {
+    console.log('1が出たで。');
+    break;
+  }
+  console.log(rnd);
+}
+
+// continue
+// ループ文の中で特定条件時だけ処理を飛ばしたい時に
+// ひねくれもののFizzBuzzで例示
+for (let number = 1 ; number < 16 ; number++) {
+  if (number % 3 > 0 && number % 5 > 0) {
+    console.log(number);
+    continue;
+  } else if (number % 3 === 0 && number % 5 > 0) {
+    console.log('Fizz');
+    continue;
+  } else if (number % 3 > 0) {
+    console.log('Buzz');
+    continue;
+  } else {
+    // 何もしない
+  }
+  console.log('FizzBuzz');
 }
