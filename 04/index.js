@@ -217,3 +217,38 @@ for (let number = 1 ; number < 16 ; number++) {
   }
   console.log('FizzBuzz');
 }
+
+// ラベル文
+// breakと一緒に使うパターン
+// 1 ~ 6の整数をランダムで出し、1なら負け、6なら勝ち。3回以内で決着がつかなければ引き分け
+// 始めのifはなくても成立するが、例示のため…。
+labelBreak: if (true) {
+  for (let i = 1 ; i < 4 ; i++) {
+    let rnd = getRandomInt(1, 7);
+    if (rnd === 1) {
+      console.log('1が出ました。負けです。')
+      break labelBreak;
+    } else if (rnd === 6) {
+      console.log('6が出ました！勝ちです！')
+      break labelBreak;
+    }
+    console.log(rnd + 'です。')
+  }
+  console.log('引き分けです。')
+}
+// continueと一緒に使うパターン
+// continueの対象はループ処理でなければならない
+// 1 ~ 7の整数をランダム生成、3個配列に入れて表示する。乱数が7なら無しになる
+// つまり、なぜか7の出るチンチロリンもどき。ピンゾロならメッセージを出しても面白そう
+labelContinue: for (let i = 1 ; i <= 10 ; i++) {
+  let chinchirorin = [];
+  for (let j = 1 ; j <= 3 ; j++) {
+    let rnd = getRandomInt(1, 8);
+    if (rnd === 7) {
+      console.log('7が出てしまいました。');
+      continue labelContinue;
+    }
+    chinchirorin.push(rnd);
+  }
+  console.log(i + '番目の結果は[' + chinchirorin + ']です。');
+}
