@@ -252,3 +252,16 @@ labelContinue: for (let i = 1 ; i <= 10 ; i++) {
   }
   console.log(i + '番目の結果は[' + chinchirorin + ']です。');
 }
+
+// try-catch
+// 回避できないエラーが予想される場合に使用。基本的には数行程度に収めること
+// try-catchにtry-catchをネストすることもできる
+// 変数・定数のスコープは各ブロック内。tryで宣言したものはcatchで呼び出せないことに注意
+try {
+  // console.log(;              // 構文エラーには対応できない
+  console.log(undefinedLet);    // 未定義の変数呼び出し 
+  console.log('エラー回避や。'); // エラー時点でcatch文を実行するため、実行されない
+} catch {
+  console.log('エラーやで。');
+}
+console.log('try-catchの後やで。');
