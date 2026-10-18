@@ -265,3 +265,50 @@ try {
   console.log('エラーやで。');
 }
 console.log('try-catchの後やで。');
+
+// try-catch-finally
+// try-catchの後始末に。基本的に使わない
+// finally分は何があっても実行される。try文のエラーで停止しようと、returnしようと、continueしようと、breakしようと実行される
+// try-finallyの構成も可能だが、try文にエラーがあるとfinallyを実行後に停止してしまう
+// try単体、catch単体、finally単体、catch-finallyはできない
+function finallyFunction() {
+  try {
+    console.log('tryです。');
+    // console.log(undefinedLet);
+    return 'Hello';
+  } catch {
+    console.log('catchです。tryにエラーが発生した時点で実行されます。');
+  } finally {
+    console.log('finallyです。returnで抜けた場合でも、必ず実行されます。');
+    return 'Hi'; // tryでreturn指定したHelloに上書きされる。tryやcatchでエラーが出ていると、エラーに上書きされる。つまり見た目上エラーなし。やばいですね☆
+  }
+}
+console.log(finallyFunction());
+
+// throw
+// 意図的にエラーを起こす文。右に1つの値を記述する必要がある
+// 明示的に「異常だから処理を中断する」ことを示せる
+// catch文で受け取ることができる。慣例的にerrorというparameterにするようだ
+// finallyでは受け取れない
+try {
+  const inputAge = '-1'; // ユーザーが入力した年齢とする
+
+  if (inputAge < 0) {
+    // console.error('0以上で入力してください。'); // これはエラーっぽいメッセージを出すだけ。ここより下も実行されるため不適
+    throw '0以上で入力してください。'
+  }
+
+  // 以下はthrowしたとき実行されない。console.errorだと実行されてしまう。
+  console.log('年齢: ' + inputAge + '歳');
+} catch (error) {
+  console.log(error);
+}
+
+// catch文で受け取るエラーメッセージについて
+// throwで指定しない場合、基本的にErrorオブジェクトで渡されるようだ
+try {
+  console.log(undefinedLet);
+} catch (error) {
+  console.log(error);      // エラー内容がオブジェクトで返る。Railsのバリデーションエラーメッセージみたい。
+  console.log(error.name); // キーで個別に呼び出す事もできる
+}
