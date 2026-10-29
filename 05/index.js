@@ -52,6 +52,7 @@ arrow831 = (name) => `Hi, ${name}!`;
 console.log(arrow831('sk-birder'));
 
 // 特徴2 parameterが1つだけのときは(parentheses)を省略できる
+// ただしデフォルトパラメーターやレストパラメーター(後述)を設定する場合は省略できない
 let arrow832 = name => `Hello, ${name}!`;
 console.log(arrow832('sk-birder'));
 
@@ -65,3 +66,54 @@ const arrow834 = (text) => ({
   text: text
 });
 console.log(arrow834('hoge'));
+
+// 84 デフォルトパラメーター
+// 引数が渡されなかったときおよびundefinedが渡された時に使われる値のこと
+// nullや0(Falsy)のときはそちら優先
+// 下記の例ではString型のUserのこと
+function basicFunc84(name = 'User') {
+  console.log(`Hi, ${name}.`);
+}
+basicFunc84(null);
+
+// 複数のパラメーターを設定するときは、デフォルトパラメーターをもつパラメーターは後ろに書く方が良い
+// 良い例
+const betterFunc84 = (name, message ='Nice to meet you') => `Hello, ${name}! ${message}.`;
+console.log(betterFunc84('sk-birder')); // 引数が1個だけの場合、2個目はundefinedとして扱われエラーにならない
+// 悪い例
+const badFunc84 = (name = 'Taro', message) => `Hello, ${name}! ${message}.`;
+console.log(badFunc84(undefined, 'welcome')); // デフォルトを使うときわざわざundefinedを書くハメになる
+
+// 複数のパラメーターがあるとき、2個目以降のパラメータは前のパラメータを参照できる
+const function84 = (name, message = `Hi, ${name}.`) => message;
+console.log(function84());
+// パラメータを過剰に渡した場合は無視される
+console.log(function84('Taro', 'Jiro', 'Ohmura', 'Shiro'));
+
+// 85 レストパラメーター
+// Rest parameter. restとは残ったもののこと。ES6(2015)以降の比較的新しい書き方
+// periodを3つ書くと、指定した位置以降のパラメーターを配列にして取得できる
+// レストパラメーターは(parentheses)内部の最後に書かないとエラーになる
+const func85 = (name, message, ...nums) => {
+  console.log(nums);
+  let total = 0;
+  for (const num of nums) {
+    total += num;
+  }
+  return name + 'が入れた数字の合計は' + total + '。' + message;
+}
+console.log(func85('猫', 'ヨシ！', 1, 3, 5, 7, 9));
+
+// レストパラメーターのない時代の書き方
+// argumentsを使用するが、これはアロー関数では使用できない(argumentsオブジェクトを持たないため)
+// 関数宣言、名前付き関数式、無名関数で使用可能
+function oldFunc85() {
+  console.log(arguments);
+  let total = 0;
+  for (const num of arguments) {
+    total += num;
+  }
+  return total;
+}
+console.log(oldFunc85(1, 3, 5, 7, 9));             // 合計値が返される
+console.log(func85('猫', 'ヨシ！', 1, 3, 5, 7, 9)); // こちらは文字列結合で返される
