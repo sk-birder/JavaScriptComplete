@@ -117,3 +117,48 @@ function oldFunc85() {
 }
 console.log(oldFunc85(1, 3, 5, 7, 9));             // 合計値が返される
 console.log(func85('猫', 'ヨシ！', 1, 3, 5, 7, 9)); // こちらは文字列結合で返される
+
+// 86 コールバック関数
+// 引数として渡される関数のこと
+const subtract = (a, b, callback) => {
+  let result = a - b;
+  callback(result);
+};
+// 以下の呼び出しの3つ目の引数がコールバック関数
+subtract(10, 3, parameter => {
+  console.log(parameter);
+});
+// コールバック関数の内容を変えることで挙動を変えられる
+subtract(10, 3, parameter => {
+  // alert(parameter); // リロード時にOKを押すことになるためコメントアウト
+});
+
+// 87 無名関数と名前付き関数式の違い
+// 名前付き関数式でつけた名前は、関数オブジェクトのnameプロパティとして設定される
+// 無名関数では""(空文字)になる
+// デバッグ時は名前付き関数式のほうが便利
+// 全て名前付き関数式にしてデバッグしやすくするも良し、冗長なので無名関数にするも良し
+// （；＾ω＾）毎回書くと名前考えるのがめんどいお…
+const function87 = (callback) => {
+  callback();
+};
+
+// 名前付き関数式の場合はErrorログに"at 関数名"が表示される
+// function87(function namedFucntionExpression () {
+//   return undeclaredLet;
+// });
+
+// 無名関数ではファイル名と行番号しか表示されない(正確には空文字が表示されている)
+// function87(function () {
+//   return undeclaredLet;
+// });
+
+// 無名関数を定数・変数に代入した場合は、nameプロパティは定数・変数名になる
+console.dir(function87); // nameプロパティは"function87"
+
+// 無名関数をオブジェクトのプロパティに代入した場合は、nameプロパティはキー名になる
+const obj87 = {
+  name: 'hoge',
+  objFunc : () => {}
+};
+console.dir(obj87.objFunc); // nameプロパティは"objFunc"
