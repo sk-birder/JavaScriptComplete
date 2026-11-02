@@ -162,3 +162,19 @@ const obj87 = {
   objFunc : () => {}
 };
 console.dir(obj87.objFunc); // nameプロパティは"objFunc"
+// 無名関数と名前付き関数式は再帰性も異なる by ChatGPT
+
+// 88 引数の変更
+// パラメータは関数内で変更できる。が、しないほうが良い
+const function88 = mes => {
+  mes = '上書きしました。';
+  return mes;
+};
+console.log(function88('メッセージです。'));
+
+// 89 typeofを使ったオブジェクトと関数の見分け
+const function89 = () => {};
+console.log(typeof function89); // 戻り値はfunction
+
+const object89 = {};
+console.log(typeof object89); // 戻り値はobject
