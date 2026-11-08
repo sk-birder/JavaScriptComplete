@@ -1,3 +1,4 @@
+// 'use strict'; // Lesson 95に登場するもの(後述)
 console.log(hoistingMessage);       // lesson93のvar呼び出し。undefinedになる
 console.dir(globalThis.greeting94); // lesson94のfunction呼び出し。こちらは初期値ごと巻き上げられる
 
@@ -43,6 +44,7 @@ var greeting = 'Hello';
 var greeting = 'Hi';
 
 // 違い2 関数以外で宣言するとブロックスコープ無し(グローバルオブジェクトになる)
+// 厳格モードにおける関数(後述)と異なり、厳格モードでもグローバルスコープになる
 { var text93 = 'message' };
 console.log(text93); // letやconstだとエラーになる
 // 関数内で宣言するとスコープを持つ。これを関数スコープという
@@ -76,8 +78,9 @@ function greeting94() { return 'Hi.' };
 console.log(greeting94()); // Hi.
 
 // ブロックスコープはないが、関数スコープはある
+// ※厳格モードではブロックスコープになる
 { function blockFunc() { return 'ブロックスコープ無し'}; };
-console.log(blockFunc());
+console.log(blockFunc()); // use strictではエラーになる
 function func94() {
   function funcInFunc() {
     return 'hoge';
@@ -93,3 +96,33 @@ console.dir(globalThis.greeting94);
 // ホイスティングがある
 // varと違い、初期値ごと巻き上げられる。後方互換性のためにこの仕様が生きている
 // 後方互換性を担保したままブロックスコープなどを使用するための仕組みがuse strict
+
+// 95 use strictディレクティブ(厳格モード)
+// strict (adj) 厳しい、厳格な、厳密な 
+// 過去のコードを動くようにしつつ、言語の不備を補うもの。過去の緩いルールから、現在の厳しいルールを強制する
+// ファイルの先頭'use strict';と記述する。これより前に書けるのはコメントだけ
+// 複数のスクリプトを使用する場合、適用する全てのスクリプトの先頭に記述する必要がある
+
+// 関数内のみ適用することも可能
+function func95()  {
+  // 'use strict';
+  x = 1; // 未宣言変数への代入は厳格モードにおいてエラーになる。letやconstを使う必要がある
+  return x;
+}
+console.log(func95());
+
+// 厳格モードではない場合、ブロック内で宣言された関数の挙動はブラウザごとに異なる
+// Chromeの場合はブロックの前ではundefinedに、ブロックが実行された後は関数が宣言される
+console.dir(blockFunc95); // undefined
+if (true) {
+  function blockFunc95() {
+    'こんな関数宣言、したらあかんで～。';
+  }
+}
+console.dir(blockFunc95); // 上のif文が実行されなかったときはundefinedになる
+
+// 厳格モードでも同じ名前の関数の再宣言はできる
+// モジュール(ここでは触れない)を使うときはletなどと同様に再宣言できなくなる
+function sameFunc() {return 'hoge';}
+function sameFunc() {return 'fuga';}
+console.log(sameFunc()); // 厳格モードでもエラーにならず、fugaが返る
