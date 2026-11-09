@@ -126,3 +126,49 @@ console.dir(blockFunc95); // 上のif文が実行されなかったときはunde
 function sameFunc() {return 'hoge';}
 function sameFunc() {return 'fuga';}
 console.log(sameFunc()); // 厳格モードでもエラーにならず、fugaが返る
+
+// 96 primitiveとobject
+// 基本型と参照型(reference)と言うこともある
+// Javascriptにおいては「オブジェクト」「配列」「関数」がobject。それ以外の全てがprimitive
+// 変数に代入されたときの動きが異なる
+
+// primitiveの場合、メモリに直接、値が書き込まれる
+let a = 1;
+let b = 2;
+a = b;
+console.log(a); // 2
+
+// objectの場合、メモリに書き込まれるのは「オブジェクト本体のアドレス」
+// objectはサイズが大きいため、いちいちコピーするよりこちらのほうが効率的なため
+let objA = { message: 'Aやで。' };
+let objB = { message: 'Bです。' };
+console.log(objA.message); // Aやで
+console.log(objB.message); // Bです
+// 以下の操作で渡されるのは「アドレス」なので、両方同じものを参照することになるため
+objA = objB;
+// objBを書き換えると
+objB.message = 'Cなのだ。';
+// 両方書き換わる
+console.log(objA.message); // Cなのだ
+console.log(objB.message); // Cなのだ
+
+// 同じ内容のオブジェクトでも、アドレスが異なれば同値演算子はfalseを返す
+const objX = { message: '同じ内容のオブジェクト' };
+const objY = { message: '同じ内容のオブジェクト' };
+console.log(objX === objY); // false
+
+// constは再代入を封じるだけ
+// primitiveならば不変になるが、objectは「アドレスを指定している」だけなので、object本体の操作は可能のまま
+// objectにおいては「const＝不変」と考えてはいけない
+// constなのに内容が変わるこの性質を可変性mutbale(adj. 変わりやすい)と言う。対義語はimmutable(adj. 不変の)
+const objZ = { name: 'Z' };
+// objZ = objX; // 再代入は出来ない
+objZ.name = 'ゼット';
+objZ.message = '追加';
+console.log(objZ); // 内容の書き換えや追加は出来る
+
+// 96 GC
+// Javascriptではガベージコレクターが自動で行ってくれる
+let obj96A = {message: '使われません'};
+let obj96B = {message: 'hoge'};
+obj96A = obj96B; // この時点でobj96Aのオブジェクトにはアクセス不可能になるため、GC対象になる
