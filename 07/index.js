@@ -27,9 +27,21 @@ let outerFunc101 = () => {
   let banana101 = 'バナナ';
   let innerFunc101 = () => {
     let cherry101 = 'さくらんぼ';
-  }
+  };
   innerFunc101(); // ここでinnerFunc101を実行して初めてinnerFunc101用のレキシカル環境が構成される
-}
+};
 outerFunc101(); // ここでouterFunc101を実行して初めてouterFunc101用のレキシカル環境が構成される
 
 // 102 クロージャ 複雑な関数におけるレキシカル環境
+// 関数の中で宣言された関数が属するレキシカル環境は、親となる関数のものになる
+// それぞれの関数オブジェクトには[[Environment]]というプロパティがあり、どのレキシカル環境に属するかを記録している
+// クロージャ：外部の変数の情報を持った関数のこと
+// (´・ω・｀)全体にやや不正確な内容です…
+const outerFunc102 = () => {
+  let fruit102 = 'pear';
+  return () => {
+    console.log(fruit102); // どこで呼び出しても参照可能。innerFunc102はouterFunc102のレキシカル環境にあるため
+  };
+};
+const innerFunc102 = outerFunc102(); // 右辺でouterFunc102のレキシカル環境が構成される
+innerFunc102();
