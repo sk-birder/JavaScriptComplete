@@ -45,3 +45,68 @@ const outerFunc102 = () => {
 };
 const innerFunc102 = outerFunc102(); // 右辺でouterFunc102のレキシカル環境が構成される
 innerFunc102();
+
+
+// 103 レキシカル環境の3つの注意点
+// 1 レキシカル環境はアドレスのように指定されている
+// ESでは多言語にあるようなスナップショット的挙動にはならない。よくわからん。
+let fruit103 = 'orange';
+const func103 = () => {
+  console.log(fruit103); // ESにおいてはここでスナップショットを作成する挙動ではない
+};
+fruit103 = 'melon'; // 再代入すると
+func103();          // その値になる
+
+// 2 関数を複数回実行すると、その度にレキシカル環境が作られる
+func103(); // 3行上のものとは別のレキシカル環境が作られる
+
+// 3 理論上、レキシカル環境はいつまでも残り続ける
+const createCounter = () => {
+  let count = 0;
+  return () => {
+    count += 1;
+    console.log(count);
+  };
+};
+// 以下の呼び出しでcreateCounterのレキシカル環境が作られる
+let counter = createCounter();
+counter(); // 1が表示される。console.logで表示されるcountはcreateCounterのレキシカル環境にある
+counter(); // 2が表示される。1つ上のものと違うレキシカル環境が作られるが、countがcreateCounterのレキシカル環境にあることは変わらない
+
+
+// 104 クロージャを使ってプライベート関数を作る
+// 通常、レキシカル環境は「内側から外側へ」しか参照できないが、
+// 関数をreturnしてクロージャを利用すれば、外部からメソッドを通じて読み取り、書き出しが可能になる
+const generatePerson = (inputName, inputAge) => {
+  // 以下の代入はメソッド呼び出しの際は実行されない
+  let age = inputAge;
+  
+  return {
+    // name: inputName,  // この書き方だと外から普通に書き換えられてしまう
+    // age: age,         // この書き方だと外から普通に書き換えられてしまう
+
+    // メソッドを使えば、呼び出しだけ出来るようにしたり
+    getName: () => inputName,
+    getAge: () => age,
+    // メソッドを呼び出さない限り外からの書き換えが出来ないようにできる
+    incrementAge: () => {
+      age += 1;
+    },
+  };
+};
+
+// クラス宣言をしていないが、インスタンス生成のような扱い方ができる
+const akane = generatePerson('Akane', 16);
+const aoi = generatePerson('Aoi', 15);
+
+// それぞれnameとageは別のレキシカル環境に保持される
+console.log(akane.getName() + 'の年齢は' + akane.getAge() + '歳'); // 16歳
+console.log(aoi.getName() + 'の年齢は' + aoi.getAge() + '歳');     // 15歳
+
+// 書き換えを行った場合も他方に影響はない
+aoi.incrementAge();
+console.log(akane.getName() + 'の年齢は' + akane.getAge() + '歳'); // 16歳
+console.log(aoi.getName() + 'の年齢は' + aoi.getAge() + '歳');     // 16歳
+
+// generatePersonのようにオブジェクトを生成して返す関数は、ファクトリ関数（Factory Function） と呼ばれる by ChatGPT
+
