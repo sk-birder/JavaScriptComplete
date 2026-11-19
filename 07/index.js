@@ -110,3 +110,21 @@ console.log(aoi.getName() + 'の年齢は' + aoi.getAge() + '歳');     // 16歳
 
 // generatePersonのようにオブジェクトを生成して返す関数は、ファクトリ関数（Factory Function） と呼ばれる by ChatGPT
 
+
+// 105 ブラウザ上でのクロージャの動き
+// V8エンジンなどの最適化により、GCなどが行われメモリが解放される
+// アクセスする必要のないレキシカル環境はなくなる
+
+// ChromeのDeveloper toolsのWatchでcount105を確認すると<not available>と表示される
+// Scope欄のClosureも無くなる
+// この例では変数count105は参照不可で、createCounter105のレキシカル環境もGC対象になると思われる
+const createCounter105 = () => {
+  let count105 = 0;
+  return () => {
+    // count105 += 1;         // この行と
+    debugger;
+    // console.log(count105); // この行をコメントアウトするとcount105を参照しないため、createCounter105のレキシカル環境は不要になる
+  }
+}
+const counter105 = createCounter105();
+counter105();
