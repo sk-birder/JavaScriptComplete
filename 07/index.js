@@ -128,3 +128,19 @@ const createCounter105 = () => {
 }
 const counter105 = createCounter105();
 counter105();
+
+
+// 106 IIFE(Immediately Invoked Function Expression: 即時実行関数式)
+// 関数の定義と実行を同時に行う。(parenthese)で囲って(引数)を後ろにつける
+(function basicFunc106() {
+  console.log('標準的なIIFE');
+})();
+// basicFunc106(); // (parentheses)の外部から呼び出すことは出来ない
+
+(() => {
+  console.log('アロー関数におけるIIFE');
+})();
+
+// IIFEはletやconstができる前、つまりvar時代の名残り
+// varにはブロックスコープがないが、関数スコープはあったため外部の変数に影響しないようにしたいときに使われていた
+// 現在IIFEはあまり使用されないが、過去のコードにはよく使われていたようだ
