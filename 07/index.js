@@ -122,7 +122,7 @@ const createCounter105 = () => {
   let count105 = 0;
   return () => {
     // count105 += 1;         // この行と
-    debugger;
+    // debugger;
     // console.log(count105); // この行をコメントアウトするとcount105を参照しないため、createCounter105のレキシカル環境は不要になる
   }
 }
@@ -144,3 +144,24 @@ counter105();
 // IIFEはletやconstができる前、つまりvar時代の名残り
 // varにはブロックスコープがないが、関数スコープはあったため外部の変数に影響しないようにしたいときに使われていた
 // 現在IIFEはあまり使用されないが、過去のコードにはよく使われていたようだ
+
+
+// 107 再帰関数
+// 関数は自分自身を呼び出すことができる
+
+// 以下は階乗を計算する関数
+// 下記のforを使う例より短く書くことができる
+const factorial = (n) => {
+  return n === 0 ? 1 : n * factorial(n - 1);
+}
+console.log(factorial(5));
+
+// forを使う例
+const factorialFor = (n) => {
+  let result = 1;
+  for (let i = n ; i > 1 ; i--) {
+    result *= i;
+  };
+  return result;
+}
+console.log(factorialFor(5));
