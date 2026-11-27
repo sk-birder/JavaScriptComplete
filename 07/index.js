@@ -125,7 +125,7 @@ const createCounter105 = () => {
     // debugger;
     // console.log(count105); // この行をコメントアウトするとcount105を参照しないため、createCounter105のレキシカル環境は不要になる
   }
-}
+};
 const counter105 = createCounter105();
 counter105();
 
@@ -151,17 +151,51 @@ counter105();
 
 // 以下は階乗を計算する関数
 // 下記のforを使う例より短く書くことができる
+// あまり大きい数字を入れるとMaximum call stack size exceededというエラーになる
 const factorial = (n) => {
   return n === 0 ? 1 : n * factorial(n - 1);
-}
+};
 console.log(factorial(5));
 
 // forを使う例
+// こちらは大きい数字を入れてもエラーにならない(InfinityというNumber型の戻り値になる)ようだ
 const factorialFor = (n) => {
   let result = 1;
   for (let i = n ; i > 1 ; i--) {
     result *= i;
   };
   return result;
-}
+};
 console.log(factorialFor(5));
+
+// Maximum call stack size exceededは無限ループでも見られる
+// const infinityLoop = () => {
+//   infinityLoop();
+// };
+// infinityLoop();
+
+
+// 108 実行コンテキストスタック execution context stack
+// ESの仕様書におけるスタックの説明に使われる名前。ブラウザではCall stackと呼ばれる
+// 関数の中で関数を実行する(再帰関数含む)ときに作られるスタックのこと
+
+// 実行コンテキスト
+// 実行する関数、状態(何行目まで実行されているかなど)、レキシカル環境。これら3つが記録されている
+
+// 実行コンテキストスタック
+// 実行コンテキストを管理するスタックのこと
+// スタックである以上、後から呼び出されたものが上に積み上がっていき、上から消えていく
+
+const c = () => {
+  return 'Hello.';
+};
+const b = () => {
+  return c();
+};
+const a = ()=> {
+  return b();
+};
+// 以下のデバッガーで逐次実行を行うとCall stackの変化を追うことができる
+// (anonymous)が最初から存在し、a生成 -> b生成 -> c生成 -> c削除 -> b削除-> a削除と動作するのがわかる
+// debugger; 
+console.log(a());
